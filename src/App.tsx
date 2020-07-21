@@ -4,6 +4,8 @@ import { fetchQuizQuestions } from './API';
 import QuestionCard from './components/QuestionCard';
 // types
 import { QuestionsState, Difficulty } from './API';
+// styles
+import { GlobalStyle } from './App.styles';
 
 export type AnswerObject = {
   question: string;
@@ -22,8 +24,6 @@ const App = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
-  console.log(questions);
-
   const startQuiz = async () => {
     setLoading(true);
     setGameOver(false);
@@ -40,7 +40,7 @@ const App = () => {
 
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!gameOver) {
-      //Users anser
+      //Users answer
       const answer = e.currentTarget.value;
       //Check answer against the correct answer
       const correct = questions[number].correct_answer === answer;
@@ -74,6 +74,8 @@ const App = () => {
   };
 
   return (
+    <>
+    <GlobalStyle />
     <div>
         <h1>REACT QUIZ</h1>
         {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
@@ -102,6 +104,7 @@ const App = () => {
           </button>
         ) : null}
     </div>
+    </>
   );
 };
 
